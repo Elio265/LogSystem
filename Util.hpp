@@ -5,12 +5,21 @@
         3. 创建目录
         4. 获取文件所在目录
 */
-
 #ifndef __MY_UTIL__
 #define __MY_UTIL__
+
+#ifdef _WIN32
+#include <direct.h>
+#define mkdir(path, mode) _mkdir(path)
+#else
+#include <sys/stat.h>
+#include <unistd.h>
+#endif
+
 #include <iostream>
 #include <time.h>
 #include <string>
+#include <string.h>
 #include <sys/stat.h>
 
 namespace wzh
@@ -22,7 +31,7 @@ namespace wzh
         public:
             static time_t now() 
             {
-                return (time_t)time(nullptr);
+                return time(nullptr);
             }
         };        
         
@@ -30,31 +39,39 @@ namespace wzh
         {
         public:
             // 检查文件是否存在
-            static bool exist(const std::string &path_and_name)
+            static bool exist(const std::string &pathname)
             {
                 struct stat st;
-                return stat(path_and_name.c_str(), &st) == 0;
+                return stat(pathname.c_str(), &st) == 0;
             }
 
             // 返回文件路径
-            static std::string path(const std::string &path_and_name)
+            static std::string path(const std::string &pathname)
             {
-                if(path_and_name.empty()) return ".";
-                int pos = path_and_name.find_last_of("/\\");
+                if(pathname.empty()) return ".";
+                int pos = pathname.find_last_of("/\\");
                 if(pos == std::string::npos) return ".";
-                return path_and_name.substr(0, pos + 1);
+                return pathname.substr(0, pos + 1);
             }
 
-            // 创建目录
-            static bool creatPath(const std::string &path_and_name)
+            // 创建目录 
+            static bool createPath(const std::string &pathname)
             {
-                if(path_and_name.empty() || exist(path_and_name)) return true;
+                if(pathname.empty() || exist(pathname)) return true;
                 size_t idx = 0;
-                while(idx < path_and_name.size())
+                while(idx < pathname.size())
                 {
-                    size_t pos = path_and_name.find_first_of("/\\", idx);
-                    if(pos == std::string::npos) return true;
-                    std::string substr = path_and_name.substr(0, pos);
+                    size_t pos = pathname.find_first_of("/\\", idx);
+                    if(pos == std::string::npos) 
+                    {
+                        if(mkdir(pathname.c_str(), 0755))
+                        {
+                            std::cerr << "mkdir failed for path: " << pathname << " errno: " << strerror(errno) << "\n";
+                            return false;
+                        }
+                        return true;
+                    }
+                    std::string substr = pathname.substr(0, pos);
                     if(idx == pos || substr == "." || substr == ".." || exist(substr)) 
                     {
                         idx = pos + 1;
@@ -62,7 +79,7 @@ namespace wzh
                     }
                     if(mkdir(substr.c_str(), 0755))
                     {
-                        std::cout << "mkdir faild\n"; // TODO
+                        std::cerr << "mkdir failed for path: " << substr << " errno: " << strerror(errno) << "\n";
                         return false;
                     }
                     idx = pos + 1;
