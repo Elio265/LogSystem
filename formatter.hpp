@@ -72,10 +72,10 @@ namespace wzh
     class timeFormatterItem : public FormatterItem
     {
     public:
-        timeFormatterItem(const std::string &str = "%H:%M:%S")
+        timeFormatterItem(const std::string &str = "%Y-%m-%d %H:%M:%S")
         : _format(str)
         {
-            if(_format.empty()) _format = "%H:%M:%S";
+            if(_format.empty()) _format = "%Y-%m-%d %H:%M:%S";
         }
 
         bool formatter(std::ostream &out, const Message &msg)
@@ -162,7 +162,7 @@ namespace wzh
     class Formatter
     {
     public:
-        Formatter(const std::string &pattern = "[%d{%H:%M:%S}][%t][%p][%c][%f:%l] %m%n")
+        Formatter(const std::string &pattern = "[%d{%Y-%m-%d %H:%M:%S}][%t][%p][%c][%f:%l] %m%n")
             : _pattern(pattern)
         {
             assert(parsePattern());
@@ -172,6 +172,7 @@ namespace wzh
         {
             for(auto &item : _items)
             {
+                if(item == nullptr) abort();
                 item->formatter(out, msg);
             }
         }
@@ -194,7 +195,10 @@ namespace wzh
             if(key == "p") return std::make_shared<levelFormatterIter>();
             if(key == "T") return std::make_shared<tabFormatterItem>();
             if(key == "n") return std::make_shared<nextFormatterItem>();
-            return std::make_shared<otherFormatterItem>(val);
+            if(key == "") return std::make_shared<otherFormatterItem>(val);
+            std::cerr << "Invalid key : " << key << std::endl; 
+            // abort();
+            return nullptr;
         }
 
         bool parsePattern()
@@ -206,7 +210,7 @@ namespace wzh
             {
                 if(_pattern[idx] == '%')
                 {
-                    if(++idx < sz)
+                    if(++idx >= sz)
                     {
                         std::cerr << "The last character of the pattern format cannot be %\n";
                         return false;
@@ -222,13 +226,18 @@ namespace wzh
                         key = _pattern[idx++];
                         if(_pattern[idx] == '{')
                         {
+                            if(key != "d")
+                            {
+                                std::cerr << "None of the keys has {}, except for d\n";
+                                return false;
+                            }
                             int pos = _pattern.find_first_of('}', idx);
                             if(pos == std::string::npos)
                             {
                                 std::cerr << "The pattern format less a }\n";
                                 return false;
                             }
-                            val = _pattern.substr(idx + 1, pos - idx);
+                            val = _pattern.substr(idx + 1, pos - idx - 1);
                             idx = pos + 1;
                         }
                         array.push_back({key, val});
@@ -246,7 +255,7 @@ namespace wzh
                     else 
                     {
                         val = _pattern.substr(idx, pos - idx);
-                        idx = pos + 1;
+                        idx = pos;
                     }
                     array.push_back({"", val});
                 }

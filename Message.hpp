@@ -2,8 +2,9 @@
 日志消息类用来描述一条日志消息 
 */
 
+
 #ifndef __MY_MESSAGE__
-#define __MY_MASSAGE__
+#define __MY_MESSAGE__
 
 #include "Level.hpp"
 #include "Util.hpp"

@@ -1,8 +1,8 @@
 
 
-// #include "Util.hpp"
-// #include "Level.hpp"
-// #include "Message.hpp"
+#include "Util.hpp"
+#include "Level.hpp"
+#include "Message.hpp"
 #include "formatter.hpp"
 
 // void testUtil()
@@ -39,11 +39,11 @@
 void testformat()
 {
     wzh::Message msg(15, "root", "main.cc", "testing...", wzh::Level::value::INFO);
-    wzh::Formatter fmt;
-    std::string str = fmt.format(msg);
-    std::cout << str << std::endl;
-
-
+    wzh::Formatter fmt("[%d{%Y-%m-%d %H:%M:%S}][%t][%p][%c][%f:%l] %m%n");
+    fmt.format(std::cout, msg);
+    //wzh::Formatter fmt;
+    //std::string str = fmt.format(msg);
+    //std::cout << str << std::endl;
 }
 
 int main()
