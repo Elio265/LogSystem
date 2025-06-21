@@ -22,6 +22,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <chrono>
+#include <sstream>
 
 namespace wzh
 {
@@ -33,6 +34,17 @@ namespace wzh
             static time_t now() 
             {
                 return time(nullptr);
+            }
+
+            static std::string dateTime(const std::string &format = "%Y-%m-%d %H:%M:%S", const time_t timestamp = now())
+            {
+                struct tm lt;
+                localtime_r(&timestamp, &lt);
+                char tmp[128];
+                strftime(tmp, 127, format.c_str(), &lt);
+                std::stringstream ss;
+                ss << tmp;
+                return ss.str();
             }
         };        
         

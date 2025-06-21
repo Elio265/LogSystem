@@ -80,11 +80,11 @@ namespace wzh
 
         bool formatter(std::ostream &out, const Message &msg)
         {
-            struct tm lt;
-            localtime_r(&msg._time, &lt);
-            char tmp[128];
-            strftime(tmp, 127, _format.c_str(), &lt);
-            out << tmp;
+            // struct tm lt;
+            // localtime_r(&msg._time, &lt);
+            // char tmp[128];
+            // strftime(tmp, 127, _format.c_str(), &lt);
+            out << Util::Date::dateTime(_format, msg._time);
             return true;
         }
     private:
@@ -162,6 +162,7 @@ namespace wzh
     class Formatter
     {
     public:
+        using ptr = std::shared_ptr<Formatter>;
         Formatter(const std::string &pattern = "[%d{%Y-%m-%d %H:%M:%S}][%t][%p][%c][%f:%l] %m%n")
             : _pattern(pattern)
         {
