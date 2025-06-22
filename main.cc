@@ -6,6 +6,7 @@
 #include "formatter.hpp"
 #include "Sink.hpp"
 #include "Logger.hpp"
+#include "Buffer.hpp"
 
 void testUtil()
 {
@@ -75,30 +76,96 @@ void testSink()
 
 void testlogger()
 {
-    std::string loggerName = "sync_logger";
-    wzh::Level::value limit = wzh::Level::value::WARN;
-    wzh::Formatter::ptr fmt(new wzh::Formatter("[%d{%Y-%m-%d %H:%M:%S}][%t][%p][%c][%f:%l] %m%n"));
-    wzh::Sink::ptr stdoutsink = wzh::SinkFactory::create<wzh::StdoutSink>();
-    wzh::Sink::ptr filesink = wzh::SinkFactory::create<wzh::FileSink>("filesink.log");
-    wzh::Sink::ptr rollsink = wzh::SinkFactory::create<wzh::RollSinkBySize>("./logs/base-", 1024 * 1024);
-    std::vector<wzh::Sink::ptr> sinks = {stdoutsink, filesink, rollsink};
-    wzh::Logger::ptr logger(new wzh::SyncLogger(loggerName, fmt, limit, sinks));
+    // std::string loggerName = "sync_logger";
+    // wzh::Level::value limit = wzh::Level::value::WARN;
+    // wzh::Formatter::ptr fmt(new wzh::Formatter("[%d{%Y-%m-%d %H:%M:%S}][%t][%p][%c][%f:%l] %m%n"));
+    // wzh::Sink::ptr stdoutsink = wzh::SinkFactory::create<wzh::StdoutSink>();
+    // wzh::Sink::ptr filesink = wzh::SinkFactory::create<wzh::FileSink>("filesink.log");
+    // wzh::Sink::ptr rollsink = wzh::SinkFactory::create<wzh::RollSinkBySize>("./logs/base-", 1024 * 1024);
+    // std::vector<wzh::Sink::ptr> sinks = {stdoutsink, filesink, rollsink};
+    // wzh::Logger::ptr logger(new wzh::SyncLogger(loggerName, fmt, limit, sinks));
 
+    // std::unique_ptr<wzh::LoggerBuilder> builder(new wzh::LocalBuildLogger());
+    // builder->buildLoggerLevel(wzh::Level::value::WARN);
+    // builder->buildLoggerName("Async_logger");
+    // builder->buildLoggerMatter("[%d{%Y-%m-%d %H:%M:%S}][%t][%p][%c][%f:%l] %m%n");
+    // builder->buildLoggerType(wzh::LogType::AsyncLogger);
+    // // builder->buildEnableUnsafe();
+    // builder->buildSink<wzh::StdoutSink>();
+    // builder->buildSink<wzh::FileSink>("./logs/test.log");
+    // wzh::Logger::ptr logger = builder->build();
+
+    wzh::Logger::ptr logger = wzh::LoggerManager::getInstance().getLogger("Async_logger");
     logger->debug(__FILE__, __LINE__, "%s", "测试日志...");
     logger->info(__FILE__, __LINE__, "%s", "测试日志...");
     logger->warn(__FILE__, __LINE__, "%s", "测试日志...");
     logger->error(__FILE__, __LINE__, "%s", "测试日志...");
     logger->fatal(__FILE__, __LINE__, "%s", "测试日志...");
 
-    int count = 0;
-    for(int i = 0; i < 1024 * 1024 * 10; i += 50)
+    // int count = 0;
+    for(int i = 0; i < 200000; i++)
     {
-        logger->fatal(__FILE__, __LINE__, "测试日志...%d", count++);
+        logger->fatal(__FILE__, __LINE__, "测试日志...%d", i);
     }
+}
+
+void testBuffer()
+{
+    std::ifstream ifs;
+    ifs.open("./logs/test.log", std::ios::binary);
+    if(ifs.is_open() == false) 
+    {
+        std::cout << "open faild\n";
+        return ;
+    }
+
+    ifs.seekg(0, std::ios::end);
+    size_t fsize = ifs.tellg();
+    ifs.seekg(0, std::ios::beg);
+    std::cout << fsize << std::endl;
+
+    std::string str;
+    str.resize(fsize);
+    ifs.read(&str[0], fsize);
+    if(ifs.good() == false) 
+    {
+        std::cout << "read faild\n";
+        return ;
+    }
+    ifs.close();
+
+    wzh::Buffer buffer;
+    for(int i = 0; i < fsize; i++)
+    {
+        buffer.push(&str[i], 1);
+    }
+    std::cout << buffer.readAbleSize() << std::endl;
+
+    std::ofstream ofs;
+    ofs.open("./logs/tmp.log", std::ios::binary);
+    size_t sz = buffer.readAbleSize();
+    for(int i = 0; i < sz; i++)
+    {
+        ofs.write(buffer.readBegin(), 1);
+        buffer.moveReader(1);
+    }
+    ofs.close();
 }
 
 int main()
 {
+
+    std::unique_ptr<wzh::LoggerBuilder> builder(new wzh::GlobalBuildLogger());
+    builder->buildLoggerLevel(wzh::Level::value::WARN);
+    builder->buildLoggerName("Async_logger");
+    builder->buildLoggerMatter("[%d{%Y-%m-%d %H:%M:%S}][%t][%p][%c][%f:%l] %m%n");
+    builder->buildLoggerType(wzh::LogType::AsyncLogger);
+    // builder->buildEnableUnsafe();
+    builder->buildSink<wzh::StdoutSink>();
+    builder->buildSink<wzh::FileSink>("./logs/test.log");
+    builder->build();
+
+    // testBuffer();
     testlogger();
     // testLevel();
     // testUtil();
