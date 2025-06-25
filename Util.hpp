@@ -36,7 +36,7 @@ namespace wzh
                 return time(nullptr);
             }
 
-            static std::string dateTime(const std::string &format = "%Y-%m-%d %H:%M:%S", const time_t timestamp = now())
+            static std::string dateTime(const std::string &format = "%Y-%m-%d %H:%M:%S", time_t timestamp = now())
             {
                 struct tm lt;
                 localtime_r(&timestamp, &lt);
