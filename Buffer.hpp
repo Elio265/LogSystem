@@ -67,11 +67,11 @@ namespace wzh
             int new_size = 0;
             if(_buffer.size() < DOUBLE_GROW_SIZE)
             {
-                new_size = _buffer.size() * 2;
+                new_size = std::max(_buffer.size() * 2, len);
             }
             else 
             {
-                new_size = _buffer.size() + INCREMENT_GROW_SIZE;
+                new_size = std::max(_buffer.size() + INCREMENT_GROW_SIZE, len);
             }
             _buffer.resize(new_size);
         }

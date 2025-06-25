@@ -80,10 +80,6 @@ namespace wzh
 
         bool formatter(std::ostream &out, const Message &msg)
         {
-            // struct tm lt;
-            // localtime_r(&msg._time, &lt);
-            // char tmp[128];
-            // strftime(tmp, 127, _format.c_str(), &lt);
             out << Util::Date::dateTime(_format, msg._time);
             return true;
         }

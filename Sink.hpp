@@ -112,7 +112,7 @@ namespace wzh
         {
             if(_ofs.is_open() == false || _cursize >= _maxsize)
             {
-                _ofs.close();
+                if(_ofs.is_open()) _ofs.close();
                 _curfilename = getRollfileName();
                 ++_count;
                 _ofs.open(_curfilename, std::ios::binary | std::ios::app);

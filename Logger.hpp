@@ -1,7 +1,7 @@
 #ifndef __MY_LOGGER__
 #define __MY_LOGGER__
 
-#include "formatter.hpp"
+#include "Formatter.hpp"
 #include "Level.hpp"
 #include "Sink.hpp"
 #include "Looper.hpp"
@@ -43,7 +43,7 @@ namespace wzh
             Message msg(line, _logname, file, str, Level::value::DEBUG);
             std::stringstream ss;
             _formatter->format(ss, msg);
-            log(ss.str().c_str(), ss.str().size());
+            log(ss.str(), ss.str().size());
             free(str);
         }
 
