@@ -13,6 +13,15 @@
         <mxCell id="A5cPuoOQGIZ8REnbMsVx-30" value="&lt;div&gt;&amp;nbsp;//返回当前时间戳&lt;/div&gt;&lt;div&gt;+&amp;nbsp;static time_t now()&lt;/div&gt;&lt;div&gt;//根据当前时间戳返回时间日期的格式化字符串&lt;/div&gt;&lt;div&gt;+&amp;nbsp;&amp;nbsp;static std::string dateTime(const std::string &amp;amp;format = &quot;%Y-%m-%d %H:%M:%S&quot;, time_t timestamp = now())&lt;/div&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-27">
           <mxGeometry y="34" width="600" height="76" as="geometry" />
         </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-39" value="wzh::Util::File" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="150" width="310" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-41" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-39">
+          <mxGeometry y="26" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-42" value="//检测文件是否存在&lt;div&gt;+&amp;nbsp;static bool exist(const std::string &amp;amp;pathname)&lt;/div&gt;&lt;div&gt;// 返回文件路径&lt;/div&gt;&lt;div&gt;+&amp;nbsp;static std::string path(const std::string &amp;amp;pathname)&lt;/div&gt;&lt;div&gt;// 创建目录&amp;nbsp;&lt;/div&gt;&lt;div&gt;+&amp;nbsp;static bool createPath(const std::string &amp;amp;pathname)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-39">
+          <mxGeometry y="34" width="310" height="96" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
