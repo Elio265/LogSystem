@@ -334,6 +334,125 @@
         <mxCell id="A5cPuoOQGIZ8REnbMsVx-153" value="+&amp;nbsp;Logger(std::string &amp;amp;logname, Formatter::ptr &amp;amp;formatter, Level::value level, std::vector&amp;lt;Sink::ptr&amp;gt; &amp;amp;sinks)&lt;div&gt;+&amp;nbsp;const std::string&amp;amp; name()&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void debug(const std::string &amp;amp;file, const size_t line, const std::string &amp;amp;fmt, ...)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void info(const std::string &amp;amp;file, const size_t line, const std::string &amp;amp;fmt, ...)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void warn(const std::string &amp;amp;file, const size_t line, const std::string &amp;amp;fmt, ...)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void error(const std::string &amp;amp;file, const size_t line, const std::string &amp;amp;fmt, ...)&lt;br&gt;+&amp;nbsp;void fatal(const std::string &amp;amp;file, const size_t line, const std::string &amp;amp;fmt, ...)&lt;/div&gt;&lt;div&gt;-&amp;nbsp;virtual bool log(const std::string &amp;amp;data, const size_t len) = 0;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-150">
           <mxGeometry y="118" width="580" height="130" as="geometry" />
         </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-154" value="wzh::SyncLogger" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="1370" width="600" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-156" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-154">
+          <mxGeometry y="26" width="600" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-157" value="+&amp;nbsp;SyncLogger(std::string &amp;amp;logname, Formatter::ptr &amp;amp;formatter, Level::value level, std::vector&amp;lt;Sink::ptr&amp;gt; &amp;amp;sinks)&lt;div&gt;-&amp;nbsp;bool log(const std::string &amp;amp;data, const size_t len) override&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-154">
+          <mxGeometry y="34" width="600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-158" value="wzh::AsyncLogger" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="1510" width="700" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-159" value="-&amp;nbsp;AsyncLooper::ptr _looper;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-158">
+          <mxGeometry y="26" width="700" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-160" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-158">
+          <mxGeometry y="52" width="700" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-161" value="+&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;AsyncLogger(std::string &amp;amp;logname, Formatter::ptr &amp;amp;formatter,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Level::value level, std::vector&amp;lt;Sink::ptr&amp;gt; &amp;amp;sinks, AsyncType type)&lt;br&gt;+&amp;nbsp;&lt;/span&gt;bool log(const std::string &amp;amp;data, const size_t len) override&lt;div&gt;+&amp;nbsp;void realLog(Buffer &amp;amp;buffer)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-158">
+          <mxGeometry y="60" width="700" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-162" value="wzh::LoggerBuilder" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-640" y="1070" width="310" height="258" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-163" value="-&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;AsyncType _asyncType;&lt;/span&gt;&lt;div&gt;- LogType _loggerType;&lt;/div&gt;&lt;div&gt;- std::string _loggerName;&lt;/div&gt;&lt;div&gt;- Level::value _level;&lt;/div&gt;&lt;div&gt;- Formatter::ptr _formatter;&lt;/div&gt;&lt;div&gt;- std::vector&amp;lt;Sink::ptr&amp;gt; _sinks;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-162">
+          <mxGeometry y="26" width="310" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-164" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-162">
+          <mxGeometry y="120" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-165" value="+&amp;nbsp;LoggerBuilder()&lt;br&gt;+&amp;nbsp;void buildLoggerName(const std::string &amp;amp;name)&lt;div&gt;+&amp;nbsp;void buildLoggerType(const LogType type)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void buildEnableUnsafe()&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void buildLoggerLevel(Level::value level)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void buildLoggerMatter(const std::string &amp;amp;pattern)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void buildSink(Args &amp;amp;&amp;amp;...args)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;virtual Logger::ptr build() = 0;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-162">
+          <mxGeometry y="128" width="310" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-166" value="wzh::LocalBuildLogger" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-680" y="1420" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-168" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-166">
+          <mxGeometry y="26" width="170" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-169" value="+&amp;nbsp;Logger::ptr build() override" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-166">
+          <mxGeometry y="34" width="170" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-170" value="wzh::GlobalBuildLogger" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-450" y="1420" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-171" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-170">
+          <mxGeometry y="26" width="170" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-172" value="+&amp;nbsp;Logger::ptr build() override" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-170">
+          <mxGeometry y="34" width="170" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-173" value="wzh::LoggerManager" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-530" y="1590" width="330" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-174" value="-&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;std::mutex _mtx;&lt;/span&gt;&lt;div&gt;- Logger::ptr _root_logger;&lt;/div&gt;&lt;div&gt;- std::unordered_map&amp;lt;std::string, Logger::ptr&amp;gt; _loggers;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-173">
+          <mxGeometry y="26" width="330" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-175" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-173">
+          <mxGeometry y="80" width="330" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-176" value="+&amp;nbsp;static LoggerManager &amp;amp;getInstance()&lt;div&gt;+&amp;nbsp;bool addLogger(Logger::ptr &amp;amp;logger)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;bool hasLogger(const std::string &amp;amp;name)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;Logger::ptr getLogger(const std::string &amp;amp;loggerName)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;Logger::ptr rootLogger()&lt;/div&gt;&lt;div&gt;-&amp;nbsp;LoggerManager()&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-173">
+          <mxGeometry y="88" width="330" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-177" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="A5cPuoOQGIZ8REnbMsVx-165" target="A5cPuoOQGIZ8REnbMsVx-166">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-595" y="1370" />
+              <mxPoint x="-595" y="1370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-179" value="派生" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="A5cPuoOQGIZ8REnbMsVx-177">
+          <mxGeometry x="-0.1957" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-178" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="A5cPuoOQGIZ8REnbMsVx-165" target="A5cPuoOQGIZ8REnbMsVx-170">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-365" y="1320" />
+              <mxPoint x="-365" y="1320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-180" value="派生" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="A5cPuoOQGIZ8REnbMsVx-178">
+          <mxGeometry x="-0.1783" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-182" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.512;exitY=1.039;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="A5cPuoOQGIZ8REnbMsVx-172" target="A5cPuoOQGIZ8REnbMsVx-173">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-350" y="1520" as="sourcePoint" />
+            <mxPoint x="-190" y="1520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-183" value="wzh::Buffer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="1750" width="280" height="248" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-184" value="-&amp;nbsp;std::vector&amp;lt;char&amp;gt; _buffer;&lt;div&gt;-&amp;nbsp;size_t _readerIdx;&lt;/div&gt;&lt;div&gt;-&amp;nbsp;size_t _writeIdx;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-183">
+          <mxGeometry y="26" width="280" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-185" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-183">
+          <mxGeometry y="80" width="280" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-186" value="+&amp;nbsp;bool push(const char *data, const size_t len)&lt;br&gt;+&amp;nbsp;const char *readBegin()&lt;div&gt;+&amp;nbsp;size_t readAbleSize()&lt;/div&gt;&lt;div&gt;+&amp;nbsp;size_t writeAbleSize()&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void moveWriter(const size_t len)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void moveReader(const size_t len)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void reset()&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void swap(Buffer &amp;amp;buffer)&lt;/div&gt;&lt;div&gt;+&amp;nbsp;bool empty()&lt;/div&gt;&lt;div&gt;-&amp;nbsp;void makeEnoughSize(const size_t len)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-183">
+          <mxGeometry y="88" width="280" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-187" value="wzh::AsyncLooper" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="1730" width="490" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-188" value="&lt;div&gt;using Function = std::function&amp;lt;void(Buffer&amp;amp;)&amp;gt;;&lt;/div&gt;-&amp;nbsp;Function _callbackFunc;&lt;div&gt;&lt;div&gt;- AsyncType _type;&lt;/div&gt;&lt;div&gt;- bool _stop;&lt;/div&gt;&lt;div&gt;- Buffer _product_buf;&lt;/div&gt;&lt;div&gt;- Buffer _consumer_buf;&lt;/div&gt;&lt;div&gt;- std::mutex _mtx;&lt;/div&gt;&lt;div&gt;- std::condition_variable _product_cond;&lt;/div&gt;&lt;div&gt;- std::condition_variable _consumer_cond;&lt;/div&gt;&lt;div&gt;- std::thread _thread;&lt;/div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-187">
+          <mxGeometry y="26" width="490" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-189" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-187">
+          <mxGeometry y="180" width="490" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A5cPuoOQGIZ8REnbMsVx-190" value="+&amp;nbsp;AsyncLooper(const Function &amp;amp;callback, AsyncType type = AsyncType::ASYNC_SAFE)&amp;nbsp;&lt;div&gt;+&amp;nbsp;&amp;nbsp;~AsyncLooper()&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void stop()&lt;/div&gt;&lt;div&gt;+&amp;nbsp;void push(const std::string &amp;amp;data, const size_t len)&lt;/div&gt;&lt;div&gt;-&amp;nbsp;void threadEntry()&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="A5cPuoOQGIZ8REnbMsVx-187">
+          <mxGeometry y="188" width="490" height="82" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
